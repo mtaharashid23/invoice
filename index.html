@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        /* Fonts */
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none !important;
+            list-style: none;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --primary: #497780;
+            --secondary: #76cfd1;
+            --black: #000;
+            --white: #fff;
+        }
+
+        /* ThemeBtn */
+        .themeBtn {
+            font-size: 1.125rem !important;
+            font-weight: 500 !important;
+            background: var(--secondary);
+            padding: 0.75rem 2rem;
+            border: none;
+            outline: none;
+            color: var(--white) !important;
+            text-transform: capitalize;
+            border-radius: 100px;
+            box-shadow: 0 7px 0 0 var(--primary);
+            transition: all 300ms ease-in-out;
+        }
+
+        .themeBtn:hover {
+            box-shadow: 0 0 0 0 var(--primary);
+        }
+
+        /* Headings */
+        .heading {
+            font-size: 2.5rem;
+            font-weight: 500;
+        }
+
+        .subHeading {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0.75rem 0 0.25rem;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .header__logo img {
+            width: 250px;
+        }
+
+        .header__nav {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            margin: 0 4rem 0 auto;
+        }
+
+        .header__nav li a {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .header__nav :is(li:nth-child(1), li:nth-child(2)) a {
+            border-right: 1px solid var(--black);
+            padding-right: 3rem;
+        }
+
+        /* Invoice Page */
+        .invoicing {
+            margin: 0 auto;
+            padding: 3rem 12rem;
+        }
+
+        .invoicing__list {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .invoicing__list li {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .invoicing__list li span {
+            font-size: 1.45rem;
+            font-weight: 400;
+            margin-left: 0.5rem;
+        }
+
+        .invoicing__list li:not(:last-child) {
+            border-right: 2px solid var(--black);
+            padding-right: 1rem;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .invoicing__table {
+            width: 100%;
+            border: 1px solid var(--black);
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        .invoicing__table :is(th, td) {
+            padding: 0.75rem;
+            text-align: center;
+        }
+
+        .invoicing__table td .date {
+            color: #00000090;
+            font-weight: 600;
+        }
+
+        .invoicing__table td .quantity {
+            width: fit-content;
+            color: var(--black);
+            background: #00000020;
+            font-weight: 700;
+            padding: 0.35rem 1rem;
+            margin: auto;
+            border-radius: 0.5rem;
+        }
+
+        .invoicing__details {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .invoicing__details>div:first-child {
+            width: 75%;
+        }
+
+        .invoicing__detailsTotal ul li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 1px dotted var(--black);
+            padding: 1rem 2rem;
+        }
+
+        .invoicing__detailsTotal ul li span {
+            width: 100px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .invoicing__detailsTotal {
+            width: 25%;
+        }
+
+        .invoicing__details>div:first-child textarea {
+            width: 100%;
+            font-size: 1.125rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            resize: none;
+            outline: none;
+        }
+
+        .invoicing__detailsTotal ul li:last-child {
+            border-bottom: 1px solid var(--black);
+            margin-bottom: 1rem;
+        }
+
+        .invoicing__detailsTotal .themeBtn {
+            width: 100%;
+            border-radius: 0.5rem;
+        }
+
+        .invoicing__detailsBank {
+            width: fit-content;
+            background: var(--primary);
+            display: flex;
+            gap: 3rem;
+            padding: 1.5rem 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .invoicing__detailsBank h4 {
+            font-size: 1.75rem;
+            font-weight: 500;
+            color: var(--white);
+        }
+
+        .invoicing__detailsBank ul li {
+            color: var(--white);
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .invoicing__detailsBank ul li span {
+            font-weight: 200;
+            margin-left: 1rem;
+        }
+
+        .invoicing__detailsBank ul li:not(:last-child) {
+            margin-bottom: 1rem;
+        }
+
+        .historic {
+            margin-top: 3rem;
+        }
+
+        .historic__list {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .historic__list li {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .historic__list li::before {
+            content: '';
+            width: 15px;
+            aspect-ratio: 1;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            border-radius: 100%;
+        }
+
+        .historic__list li:nth-child(1)::before {
+            background: #EC0057;
+        }
+
+        .historic__list li:nth-child(2)::before {
+            background: #F2A700;
+        }
+
+        .historic__list li:nth-child(3)::before {
+            background: #80AF00;
+        }
+
+        .historic-pdf {
+            margin-top: 2rem;
+        }
+
+        .historic-pdf__list {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .historic-pdf__list li {
+            width: 172px;
+            background: #00000020;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+        }
+
+        .historic-pdf__list li img {
+            width: 60%;
+        }
+
+        .historic-pdf__list li .title {
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.25;
+            margin-top: 0.5rem;
+        }
+
+        .historic-pdf__list li .title span {
+            font-size: 1.5rem;
+            font-weight: 300;
+            display: block;
+        }
+
+        .historic-pdf__list li .dot {
+            width: 20px;
+            aspect-ratio: 1;
+            position: absolute;
+            top: -0.5rem;
+            left: -0.5rem;
+            border-radius: 100%;
+        }
+
+        .dot--pink {
+            background: #EC0057;
+        }
+
+        .dot--yellow {
+            background: #F2A700;
+        }
+
+        .dot--green {
+            background: #80AF00;
+        }
+
+        /* Responsive */
+        @media only screen and (max-width: 1600px) {}
+
+        @media only screen and (max-width: 1445px) {
+            html {
+                font-size: 15px;
+            }
+        }
+
+        @media only screen and (max-width: 1366px) {
+            html {
+                font-size: 14px;
+            }
+
+            .invoicing {
+                padding: 3rem 8rem;
+            }
+        }
+
+        @media (max-width: 1199.98px) {
+            html {
+                font-size: 13px;
+            }
+
+            .invoicing {
+                padding: 3rem 5rem;
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            html {
+                font-size: 12px;
+            }
+
+            .header__nav {
+                gap: 2rem;
+                margin: 0 2rem 0 auto;
+            }
+
+            .header__nav :is(li:nth-child(1), li:nth-child(2)) a {
+                padding-right: 1rem;
+            }
+
+            .invoicing__details>div:first-child {
+                width: 70%;
+            }
+
+            .invoicing__detailsTotal {
+                width: 30%;
+            }
+
+            .invoicing__detailsTotal ul li {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            html {
+                font-size: 11px;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .header__nav {
+                margin: 0;
+            }
+
+            .invoicing__details {
+                flex-direction: column-reverse;
+            }
+
+            :is(.invoicing__details>div:first-child, .invoicing__detailsTotal) {
+                width: 100%;
+            }
+
+            .historic-pdf__list li img {
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 575.98px) {}
+
+        @media (max-width: 320.98px) {}
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <a href="#" class="header__logo">
+            <img src="logo.png" alt="image" />
+        </a>
+        <ul class="header__nav">
+            <li>
+                <a href="">Profile</a>
+            </li>
+            <li>
+                <a href="">Accounts</a>
+            </li>
+            <li>
+                <a href="">Library</a>
+            </li>
+        </ul>
+        <a href="" class="themeBtn">LOG OUT</a>
+    </header>
+
+    <section class="invoicing">
+        <h2 class="heading">Invoicing</h2>
+        <ul class="invoicing__list">
+            <li>INVOICE: <span>INV123456789</span></li>
+            <li>NAME: <span>Name Here / Business</span></li>
+            <li>DATE: <span>DD/MM/YYYY</span></li>
+        </ul>
+        <ul class="invoicing__list">
+            <li>TO: <span>Faithful Solutions Ltd.</span></li>
+        </ul>
+        <div class="table-responsive">
+            <table class="invoicing__table" border="">
+                <tr>
+                    <th>Date</th>
+                    <th>Deliveries</th>
+                    <th>Delivery Price</th>
+                    <th>Collections</th>
+                    <th>Collection Price</th>
+                    <th>Specials</th>
+                    <th>Special Price</th>
+                    <th>Day Total</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="date">24/10/2024</div>
+                    </td>
+                    <td>
+                        <div class="quantity">120</div>
+                    </td>
+                    <td>
+                        <div class="quantity">70p</div>
+                    </td>
+                    <td>
+                        <div class="quantity">4</div>
+                    </td>
+                    <td>
+                        <div class="quantity">80p</div>
+                    </td>
+                    <td>
+                        <div class="quantity">XXX</div>
+                    </td>
+                    <td>
+                        <div class="quantity">80p</div>
+                    </td>
+                    <td>£128.40</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="date">25/10/2024</div>
+                    </td>
+                    <td>
+                        <div class="quantity">120</div>
+                    </td>
+                    <td>
+                        <div class="quantity">70p</div>
+                    </td>
+                    <td>
+                        <div class="quantity">4</div>
+                    </td>
+                    <td>
+                        <div class="quantity">80p</div>
+                    </td>
+                    <td>
+                        <div class="quantity">XXX</div>
+                    </td>
+                    <td>
+                        <div class="quantity">80p</div>
+                    </td>
+                    <td>£128.40</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="date">26/10/2024</div>
+                    </td>
+                    <td>
+                        <div class="quantity">120</div>
+                    </td>
+                    <td>
+                        <div class="quantity">70p</div>
+                    </td>
+                    <td>
+                        <div class="quantity">4</div>
+                    </td>
+                    <td>
+                        <div class="quantity">80p</div>
+                    </td>
+                    <td>
+                        <div class="quantity">XXX</div>
+                    </td>
+                    <td>
+                        <div class="quantity">80p</div>
+                    </td>
+                    <td>£128.40</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="date">27/10/2024</div>
+                    </td>
+                    <td>
+                        <div class="quantity">120</div>
+                    </td>
+                    <td>
+                        <div class="quantity">70p</div>
+                    </td>
+                    <td>
+                        <div class="quantity">4</div>
+                    </td>
+                    <td>
+                        <div class="quantity">80p</div>
+                    </td>
+                    <td>
+                        <div class="quantity">XXX</div>
+                    </td>
+                    <td>
+                        <div class="quantity">80p</div>
+                    </td>
+                    <td>£128.40</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="date">28/10/2024</div>
+                    </td>
+                    <td>
+                        <div class="quantity">120</div>
+                    </td>
+                    <td>
+                        <div class="quantity">70p</div>
+                    </td>
+                    <td>
+                        <div class="quantity">4</div>
+                    </td>
+                    <td>
+                        <div class="quantity">80p</div>
+                    </td>
+                    <td>
+                        <div class="quantity">XXX</div>
+                    </td>
+                    <td>
+                        <div class="quantity">80p</div>
+                    </td>
+                    <td>£128.40</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="date">29/10/2024</div>
+                    </td>
+                    <td>
+                        <div class="quantity">120</div>
+                    </td>
+                    <td>
+                        <div class="quantity">70p</div>
+                    </td>
+                    <td>
+                        <div class="quantity">4</div>
+                    </td>
+                    <td>
+                        <div class="quantity">80p</div>
+                    </td>
+                    <td>
+                        <div class="quantity">XXX</div>
+                    </td>
+                    <td>
+                        <div class="quantity">80p</div>
+                    </td>
+                    <td>£128.40</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="date">30/10/2024</div>
+                    </td>
+                    <td>
+                        <div class="quantity">120</div>
+                    </td>
+                    <td>
+                        <div class="quantity">70p</div>
+                    </td>
+                    <td>
+                        <div class="quantity">4</div>
+                    </td>
+                    <td>
+                        <div class="quantity">80p</div>
+                    </td>
+                    <td>
+                        <div class="quantity">XXX</div>
+                    </td>
+                    <td>
+                        <div class="quantity">80p</div>
+                    </td>
+                    <td>£128.40</td>
+                </tr>
+            </table>
+        </div>
+        <div class="invoicing__details">
+            <div>
+                <h3 class="subHeading">
+                    DESCRIBE ANY SPECIAL PRICES FOR TRAINING OR BACKLOG PRICES HERE:
+                </h3>
+                <textarea rows="6"
+                    placeholder="Enter a description of your addition time sheet information here for admin purposes including training "></textarea>
+                <div class="invoicing__detailsBank">
+                    <h4>Bank details</h4>
+                    <ul>
+                        <li>BANK: <span>Bank name</span></li>
+                        <li>SORT CODE: <span>123456</span></li>
+                        <li>ACC NO.: <span>12345678</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="invoicing__detailsTotal">
+                <ul>
+                    <li>
+                        <span>SUB TOTAL:</span>
+                        <span>£898.80</span>
+                    </li>
+                    <li>
+                        <span>VAT @20%:</span>
+                        <span>£179.76</span>
+                    </li>
+                    <li>
+                        <span>TOTAL:</span>
+                        <span>£1,078.56</span>
+                    </li>
+                </ul>
+                <button type="submit" class="themeBtn">submit</button>
+            </div>
+        </div>
+        <div class="historic">
+            <h2 class="heading">Historic Invoices</h2>
+            <ul class="historic__list">
+                <li>INVOICE RECIEVED</li>
+                <li>INVOICE CHECKED</li>
+                <li>INVOICE PAID</li>
+            </ul>
+            <div class="historic-pdf">
+                <h3 class="subHeading">CURRENT:</h3>
+                <ul class="historic-pdf__list">
+                    <li>
+                        <span class="dot dot--pink"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                    <li>
+                        <span class="dot dot--yellow"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                    <li>
+                        <span class="dot dot--yellow"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                    <li>
+                        <span class="dot dot--yellow"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                </ul>
+            </div>
+            <div class="historic-pdf">
+                <h3 class="subHeading">PAID:</h3>
+                <ul class="historic-pdf__list">
+                    <li>
+                        <span class="dot dot--green"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                    <li>
+                        <span class="dot dot--green"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                    <li>
+                        <span class="dot dot--green"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                    <li>
+                        <span class="dot dot--green"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                    <li>
+                        <span class="dot dot--green"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                    <li>
+                        <span class="dot dot--green"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                    <li>
+                        <span class="dot dot--green"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                    <li>
+                        <span class="dot dot--green"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                    <li>
+                        <span class="dot dot--green"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                    <li>
+                        <span class="dot dot--green"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                    <li>
+                        <span class="dot dot--green"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                    <li>
+                        <span class="dot dot--green"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                    <li>
+                        <span class="dot dot--green"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                    <li>
+                        <span class="dot dot--green"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                    <li>
+                        <span class="dot dot--green"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                    <li>
+                        <span class="dot dot--green"></span>
+                        <img src="pdf.png" alt="image">
+                        <h4 class="title">INV123456788.PDF <span>WK38</span></h4>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
